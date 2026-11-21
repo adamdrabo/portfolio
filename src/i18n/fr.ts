@@ -3,6 +3,7 @@ export const fr = {
     title: 'Adam Drabo · Développeur mobile',
   },
   nav: {
+    mainLabel: 'Navigation principale',
     achievements: 'Réalisations',
     web: 'Web',
     mobile: 'Mobile',

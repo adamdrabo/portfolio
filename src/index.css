@@ -19,6 +19,7 @@
   --container-padding: clamp(20px, 5vw, 96px);
   --radius-card: 24px;
   --radius-pill: 999px;
+  --header-height: 92px;
 }
 
 *,
@@ -73,6 +74,10 @@ button {
 :focus-visible {
   outline: 3px solid var(--color-orange);
   outline-offset: 3px;
+}
+
+[id] {
+  scroll-margin-top: var(--header-height);
 }
 
 .container {
