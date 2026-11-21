@@ -1,0 +1,35 @@
+.switcher {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-pill);
+  background-color: var(--color-white);
+}
+
+.option {
+  padding: 6px 12px;
+  border: none;
+  border-radius: var(--radius-pill);
+  background: none;
+  color: var(--color-muted);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 15px;
+}
+
+.option:hover {
+  color: var(--color-ink);
+}
+
+.option[aria-pressed='true'] {
+  background-color: var(--color-ink);
+  color: var(--color-white);
+}
+
+@media (max-width: 379px) {
+  .option {
+    padding: 6px 9px;
+  }
+}

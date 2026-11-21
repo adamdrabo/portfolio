@@ -5,6 +5,7 @@ export const en: Translations = {
     title: 'Adam Drabo · Mobile Developer',
   },
   nav: {
+    mainLabel: 'Main navigation',
     achievements: 'Work',
     web: 'Web',
     mobile: 'Mobile',
