@@ -8,6 +8,8 @@ function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isWorkOpen, setIsWorkOpen] = useState(false)
   const workRef = useRef<HTMLLIElement>(null)
+  const workButtonRef = useRef<HTMLButtonElement>(null)
+  const burgerRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
     function handlePointerDown(event: PointerEvent) {
@@ -17,9 +19,22 @@ function Navigation() {
     }
 
     function handleKeyDown(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
+      if (event.key !== 'Escape') {
+        return
+      }
+
+      if (isMenuOpen) {
         setIsWorkOpen(false)
         setIsMenuOpen(false)
+        burgerRef.current?.focus()
+        return
+      }
+
+      if (isWorkOpen) {
+        setIsWorkOpen(false)
+        if (workRef.current?.contains(document.activeElement)) {
+          workButtonRef.current?.focus()
+        }
       }
     }
 
@@ -30,7 +45,13 @@ function Navigation() {
       document.removeEventListener('pointerdown', handlePointerDown)
       document.removeEventListener('keydown', handleKeyDown)
     }
-  }, [])
+  }, [isMenuOpen, isWorkOpen])
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      workButtonRef.current?.focus()
+    }
+  }, [isMenuOpen])
 
   function closeMenus() {
     setIsWorkOpen(false)
@@ -53,6 +74,7 @@ function Navigation() {
           <ul id="main-menu" className={`${styles.menu} ${isMenuOpen ? styles.menuOpen : ''}`}>
             <li ref={workRef} className={styles.dropdown}>
               <button
+                ref={workButtonRef}
                 type="button"
                 className={styles.link}
                 aria-expanded={isWorkOpen}
@@ -96,6 +118,7 @@ function Navigation() {
         <div className={styles.actions}>
           <LanguageSwitcher />
           <button
+            ref={burgerRef}
             type="button"
             className={styles.burger}
             aria-expanded={isMenuOpen}
