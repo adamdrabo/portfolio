@@ -16,4 +16,20 @@ export const en: Translations = {
     closeMenu: 'Close menu',
     chooseLanguage: 'Choose language',
   },
+  hero: {
+    badge: 'Mobile developer · Montréal',
+    titleStart: '',
+    titleHighlight: 'Useful',
+    titleEnd: ' apps, designed for the communities I know.',
+    intro:
+      'Android developer (Kotlin, Jetpack Compose) with an AEC in mobile application development from Collège Ahuntsic. I enjoy building practical tools, especially for the African diaspora.',
+    primaryCta: 'See my work',
+    secondaryCta: 'Download my resume',
+    mockup: {
+      amount: 'Amount',
+      result: 'Result',
+      convert: 'Convert',
+      history: 'Recent conversions',
+    },
+  },
 }
