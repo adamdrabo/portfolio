@@ -1,3 +1,4 @@
+import About from '../components/About'
 import Hero from '../components/Hero'
 import ProjectSection from '../components/ProjectSection'
 import { useLanguage } from '../hooks/useLanguage'
@@ -26,7 +27,7 @@ function HomePage() {
         <ProjectSection category="web" />
         <ProjectSection category="mobile" />
       </div>
-      <Placeholder id="about" title={t.nav.about} />
+      <About />
       <Placeholder id="contact" title={t.nav.contact} />
     </main>
   )

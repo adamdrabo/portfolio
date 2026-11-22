@@ -48,4 +48,15 @@ export const en: Translations = {
     previous: 'Previous project',
     next: 'Next project',
   },
+  about: {
+    eyebrow: '03 · About',
+    title: "Hi, I'm Adam.",
+    lead: "I live in Montréal-Est. I completed my AEC in mobile application development at Collège Ahuntsic in 2026, and I'm now continuing to learn web development.",
+    body: 'What drives me: building apps that meet real needs, often those of the African diaspora. Outside of code, I coordinated volunteers for eight years, and I play soccer.',
+    stats: [
+      { value: 'AEC', label: 'Collège Ahuntsic, 2026' },
+      { value: '3 platforms', label: 'Android, iOS, Web' },
+      { value: '8 years', label: 'coordinating volunteers' },
+    ],
+  },
 }
