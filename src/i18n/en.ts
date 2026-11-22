@@ -59,4 +59,11 @@ export const en: Translations = {
       { value: '8 years', label: 'coordinating volunteers' },
     ],
   },
+  contact: {
+    eyebrow: '04 · Contact',
+    title: 'A job, a project, a question?',
+    text: 'Write to me, I answer every message.',
+    emailCta: 'Send an email',
+    newTab: 'new tab',
+  },
 }
