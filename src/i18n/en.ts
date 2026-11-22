@@ -32,4 +32,20 @@ export const en: Translations = {
       history: 'Recent conversions',
     },
   },
+  projects: {
+    web: {
+      eyebrow: '01 · Web work',
+      title: 'What I build for the web',
+    },
+    mobile: {
+      eyebrow: '02 · Mobile work',
+      title: "What I've built for mobile",
+    },
+    emptyTitle: 'Projects coming soon',
+    emptyText: 'New projects are on the way.',
+    technologies: 'Technologies',
+    github: 'View on GitHub',
+    previous: 'Previous project',
+    next: 'Next project',
+  },
 }

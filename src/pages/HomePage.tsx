@@ -1,4 +1,5 @@
 import Hero from '../components/Hero'
+import ProjectSection from '../components/ProjectSection'
 import { useLanguage } from '../hooks/useLanguage'
 import styles from './HomePage.module.css'
 
@@ -22,8 +23,8 @@ function HomePage() {
     <main>
       <Hero />
       <div id="work">
-        <Placeholder id="web" title={t.nav.web} />
-        <Placeholder id="mobile" title={t.nav.mobile} />
+        <ProjectSection category="web" />
+        <ProjectSection category="mobile" />
       </div>
       <Placeholder id="about" title={t.nav.about} />
       <Placeholder id="contact" title={t.nav.contact} />
