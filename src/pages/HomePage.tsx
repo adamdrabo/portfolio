@@ -1,25 +1,9 @@
 import About from '../components/About'
+import Contact from '../components/Contact'
 import Hero from '../components/Hero'
 import ProjectSection from '../components/ProjectSection'
-import { useLanguage } from '../hooks/useLanguage'
-import styles from './HomePage.module.css'
-
-type PlaceholderProps = {
-  id: string
-  title: string
-}
-
-function Placeholder({ id, title }: PlaceholderProps) {
-  return (
-    <section id={id} className={`container ${styles.placeholder}`}>
-      <h2>{title}</h2>
-    </section>
-  )
-}
 
 function HomePage() {
-  const { t } = useLanguage()
-
   return (
     <main>
       <Hero />
@@ -28,7 +12,7 @@ function HomePage() {
         <ProjectSection category="mobile" />
       </div>
       <About />
-      <Placeholder id="contact" title={t.nav.contact} />
+      <Contact />
     </main>
   )
 }

@@ -57,4 +57,11 @@ export const fr = {
       { value: '8 ans', label: 'de coordination de bénévoles' },
     ],
   },
+  contact: {
+    eyebrow: '04 · Contact',
+    title: 'Un poste, un projet, une question?',
+    text: 'Écrivez-moi, je réponds à tous les messages.',
+    emailCta: 'Écrire un courriel',
+    newTab: 'nouvel onglet',
+  },
 }
