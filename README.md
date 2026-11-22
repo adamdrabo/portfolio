@@ -2,6 +2,8 @@
 
 Personal portfolio of Adam Drabo, mobile developer based in Montréal. Bilingual (French / English), responsive, built from a Penpot mockup.
 
+**Live:** https://adamdrabo.duckdns.org
+
 ## Stack
 
 - React 19, TypeScript, Vite
@@ -43,7 +45,20 @@ To add a project, add an object to `src/data/projects.ts`.
 - **Container:** non-root user, pinned base images, read-only filesystem, all Linux capabilities dropped, `no-new-privileges`, CPU and memory limits, `.dockerignore` keeps secrets out of the image.
 - **HTTP headers:** Content Security Policy, HSTS, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, COOP, CORP. Server version hidden, only GET and HEAD allowed.
 - **CI (GitHub Actions):** lint, build, `npm audit`, Docker image scan with Trivy. Actions pinned to commit SHAs, read-only token.
-- **Repository:** Dependabot, CodeQL, secret scanning with push protection, automated review by Claude.
+- **Repository:** Dependabot, CodeQL, secret scanning with push protection.
+
+## Deployment
+
+```
+merge into main → build → Trivy scan → push to GHCR → SSH deploy → Oracle Cloud VM
+```
+
+- **Hosting:** Oracle Cloud Always Free virtual machine running Ubuntu 24.04 LTS.
+- **Image:** built and scanned in GitHub Actions, then published to GitHub Container Registry with the commit SHA as tag. The server never builds code, it only pulls a scanned image.
+- **Delivery:** the deploy job runs in a `production` environment that only `main` can use. It connects with a dedicated SSH key that the server restricts (`restrict` + forced command) to a single deploy script. The script only accepts a commit SHA, pulls that exact image, waits for the container health check and rolls back to the previous version if it fails. The server host key is pinned.
+- **Reverse proxy:** Nginx on the host terminates TLS (Let's Encrypt, renewed automatically, TLS 1.2 and 1.3 only, HTTP redirected to HTTPS) and forwards to the container, which only listens on `127.0.0.1`. Requests for unknown host names are dropped.
+- **Server hardening:** SSH with keys only, no root login and an allow list of users; deny-by-default firewall on two layers (Oracle security list and iptables) with only ports 22, 80 and 443 open; fail2ban; automatic security updates; Docker daemon with log rotation, `no-new-privileges` and inter-container traffic disabled; process limit on the container.
+- **Results:** SSL Labs A+, Security Headers A+.
 
 ## Branch workflow
 
