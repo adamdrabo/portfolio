@@ -46,4 +46,15 @@ export const fr = {
     previous: 'Projet précédent',
     next: 'Projet suivant',
   },
+  about: {
+    eyebrow: '03 · À propos',
+    title: "Bonjour, moi c'est Adam.",
+    lead: "Je vis à Montréal-Est. J'ai terminé mon AEC en développement d'applications mobiles au Collège Ahuntsic en 2026, et je continue aujourd'hui d'apprendre en développement web.",
+    body: "Ce qui me motive : créer des applications qui répondent à de vrais besoins, souvent ceux de la diaspora africaine. En dehors du code, j'ai coordonné des bénévoles pendant huit ans, et je joue au soccer.",
+    stats: [
+      { value: 'AEC', label: 'Collège Ahuntsic, 2026' },
+      { value: '3 plateformes', label: 'Android, iOS, Web' },
+      { value: '8 ans', label: 'de coordination de bénévoles' },
+    ],
+  },
 }
