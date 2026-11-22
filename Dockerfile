@@ -5,7 +5,7 @@ RUN npm ci
 COPY . .
 RUN npm run build
 
-FROM nginxinc/nginx-unprivileged:1.30.7-alpine
+FROM nginxinc/nginx-unprivileged:1.30-alpine
 USER root
 RUN apk upgrade --no-cache
 COPY nginx/security-headers.conf /etc/nginx/snippets/security-headers.conf
