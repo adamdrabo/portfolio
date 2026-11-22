@@ -59,3 +59,37 @@ jobs:
       - name: Log out
         if: always()
         run: docker logout ghcr.io
+
+  deploy:
+    name: Deploy to server
+    runs-on: ubuntu-24.04
+    needs: publish
+    timeout-minutes: 10
+    environment:
+      name: production
+      url: https://adamdrabo.duckdns.org
+    permissions: {}
+    steps:
+      - name: Configure SSH
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          DEPLOY_KNOWN_HOSTS: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        run: |
+          install -m 700 -d ~/.ssh
+          printf '%s\n' "${DEPLOY_SSH_KEY}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          printf '%s\n' "${DEPLOY_KNOWN_HOSTS}" > ~/.ssh/known_hosts
+
+      - name: Deploy image
+        env:
+          DEPLOY_HOST: ${{ vars.DEPLOY_HOST }}
+        run: |
+          ssh -i ~/.ssh/deploy_key \
+            -o IdentitiesOnly=yes \
+            -o StrictHostKeyChecking=yes \
+            -o BatchMode=yes \
+            "deploy@${DEPLOY_HOST}" "${GITHUB_SHA}"
+
+      - name: Remove SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
