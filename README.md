@@ -1,75 +1,54 @@
-# React + TypeScript + Vite
+# Adam Drabo · Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Personal portfolio of Adam Drabo, mobile developer based in Montréal. Bilingual (French / English), responsive, built from a Penpot mockup.
 
-Currently, two official plugins are available:
+## Stack
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- React 19, TypeScript, Vite
+- CSS Modules, self-hosted fonts (Fontsource)
+- Nginx (unprivileged) in Docker
 
-## React Compiler
+## Run locally
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm ci
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://npmx.dev/package/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://npmx.dev/package/eslint-plugin-react-dom) for React-specific lint rules:
+Production build served by Nginx in a container:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+```bash
+docker compose up --build -d
+```
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+The site is then available at http://localhost:8080.
+
+## Project structure
 
 ```
+src/
+├── components/   UI sections (Navigation, Hero, ProjectSection, About, Contact, Footer)
+├── data/         Projects and contact details
+├── hooks/        useLanguage, useCarousel
+├── i18n/         French and English texts, language context
+├── pages/        HomePage
+└── types/        Shared TypeScript types
+nginx/            Server and security header configuration
+```
+
+To add a project, add an object to `src/data/projects.ts`.
+
+## Security
+
+- **Container:** non-root user, pinned base images, read-only filesystem, all Linux capabilities dropped, `no-new-privileges`, CPU and memory limits, `.dockerignore` keeps secrets out of the image.
+- **HTTP headers:** Content Security Policy, HSTS, `X-Content-Type-Options`, `X-Frame-Options`, `Referrer-Policy`, `Permissions-Policy`, COOP, CORP. Server version hidden, only GET and HEAD allowed.
+- **CI (GitHub Actions):** lint, build, `npm audit`, Docker image scan with Trivy. Actions pinned to commit SHAs, read-only token.
+- **Repository:** Dependabot, CodeQL, secret scanning with push protection, automated review by Claude.
+
+## Branch workflow
+
+- `main`: production
+- `preprod`: integration branch
+- `dev/feature/...`: one branch per feature, created from `preprod`
+
+Every change goes through a pull request into `preprod`, then `preprod` is merged into `main` once validated. Both branches are protected: pull request required, CI checks must pass, no force push or deletion.

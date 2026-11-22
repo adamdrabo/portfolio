@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react'
+import { contact } from '../data/contact'
 import { useLanguage } from '../hooks/useLanguage'
 import LanguageSwitcher from './LanguageSwitcher'
 import styles from './Navigation.module.css'
@@ -102,11 +103,13 @@ function Navigation() {
                 {t.nav.about}
               </a>
             </li>
-            <li>
-              <a href="/cv.pdf" target="_blank" rel="noopener noreferrer" className={styles.link}>
-                {t.nav.cv}
-              </a>
-            </li>
+            {contact.cvUrl && (
+              <li>
+                <a href={contact.cvUrl} target="_blank" rel="noopener noreferrer" className={styles.link}>
+                  {t.nav.cv}
+                </a>
+              </li>
+            )}
             <li>
               <a href="#contact" className={styles.link} onClick={closeMenus}>
                 {t.nav.contact}
