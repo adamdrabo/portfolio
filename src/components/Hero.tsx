@@ -1,3 +1,4 @@
+import { contact } from '../data/contact'
 import { useLanguage } from '../hooks/useLanguage'
 import PhoneMockup from './PhoneMockup'
 import styles from './Hero.module.css'
@@ -26,9 +27,11 @@ function Hero() {
             {t.hero.primaryCta}
             <span aria-hidden="true">→</span>
           </a>
-          <a href="/cv.pdf" download className={styles.secondary}>
-            {t.hero.secondaryCta}
-          </a>
+          {contact.cvUrl && (
+            <a href={contact.cvUrl} download className={styles.secondary}>
+              {t.hero.secondaryCta}
+            </a>
+          )}
         </div>
       </div>
 
