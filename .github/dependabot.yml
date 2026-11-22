@@ -5,6 +5,10 @@ updates:
     target-branch: preprod
     schedule:
       interval: weekly
+    ignore:
+      - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
     groups:
       npm-dependencies:
         patterns:
