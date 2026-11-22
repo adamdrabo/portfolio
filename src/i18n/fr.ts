@@ -30,4 +30,20 @@ export const fr = {
       history: 'Dernières conversions',
     },
   },
+  projects: {
+    web: {
+      eyebrow: '01 · Réalisations web',
+      title: 'Ce que je construis pour le web',
+    },
+    mobile: {
+      eyebrow: '02 · Réalisations mobiles',
+      title: "Ce que j'ai construit sur mobile",
+    },
+    emptyTitle: 'Projets à venir',
+    emptyText: 'De nouveaux projets arrivent bientôt.',
+    technologies: 'Technologies',
+    github: 'Voir sur GitHub',
+    previous: 'Projet précédent',
+    next: 'Projet suivant',
+  },
 }
