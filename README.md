@@ -52,3 +52,9 @@ To add a project, add an object to `src/data/projects.ts`.
 - `dev/feature/...`: one branch per feature, created from `preprod`
 
 Every change goes through a pull request into `preprod`, then `preprod` is merged into `main` once validated. Both branches are protected: pull request required, CI checks must pass, no force push or deletion.
+
+## License
+
+© Adam Drabo. All rights reserved.
+
+The source code is public so it can be read and evaluated. The design, logo and content may not be reused without permission.
