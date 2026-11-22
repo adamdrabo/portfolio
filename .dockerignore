@@ -1,0 +1,12 @@
+node_modules
+dist
+.git
+.github
+.env
+.env.*
+*.log
+.DS_Store
+Dockerfile
+docker-compose.yml
+.dockerignore
+.coderabbit.yaml
